@@ -5,6 +5,7 @@ import { SuccessState } from './components/SuccessState'
 import { Countdown } from './components/Countdown'
 import type { Rsvp } from './types/rsvp'
 import { subscribeToAuthState, logoutAdmin } from './services/rsvpService'
+import { getDeviceConfirmedNames, addDeviceConfirmedName } from './utils/deviceHistory'
 
 const AdminLogin = lazy(() =>
   import('./components/AdminLogin').then((m) => ({ default: m.AdminLogin }))
@@ -19,6 +20,7 @@ export function App() {
   const [viewMode, setViewMode] = useState<ViewMode>('guest')
   const [lastConfirmed, setLastConfirmed] = useState<Rsvp | null>(null)
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
+  const [deviceConfirmedNames, setDeviceConfirmedNames] = useState<string[]>(getDeviceConfirmedNames)
 
   useEffect(() => {
     const unsubscribe = subscribeToAuthState((user) => {
@@ -66,10 +68,13 @@ export function App() {
   }
 
   function handleRsvpSuccess(rsvp: Rsvp) {
+    const updated = addDeviceConfirmedName(rsvp.name)
+    setDeviceConfirmedNames(updated)
     setLastConfirmed(rsvp)
   }
 
   function handleReset() {
+    setDeviceConfirmedNames(getDeviceConfirmedNames())
     setLastConfirmed(null)
   }
 
@@ -109,25 +114,25 @@ export function App() {
   }
 
   return (
-    <main className="h-[100dvh] max-h-[100dvh] w-full flex flex-col justify-between items-center px-4 py-4 sm:py-6 md:py-8 bg-[#FAF8F5] text-[#1E1B18] relative overflow-hidden">
+    <main className="h-[100dvh] max-h-[100dvh] w-full flex flex-col justify-between items-center px-4 py-3 sm:py-6 md:py-8 bg-[#FAF8F5] text-[#1E1B18] relative overflow-hidden">
       <div className="absolute -top-32 -left-32 w-80 h-80 rounded-full bg-[#F3ECE0]/70 blur-3xl pointer-events-none" />
       <div className="absolute -bottom-32 -right-32 w-80 h-80 rounded-full bg-[#F0EBE1]/70 blur-3xl pointer-events-none" />
 
       <header className="text-center z-10 pt-1 sm:pt-2">
-        <span className="text-[11px] md:text-xs font-semibold uppercase tracking-[0.3em] text-[#78716C] block mb-1.5 sm:mb-2">
-          Celebração de Casamento
+        <span className="text-[11px] md:text-xs font-semibold uppercase tracking-[0.3em] text-[#78716C] block mb-1 sm:mb-2">
+          Recepção de Casamento
         </span>
         <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-normal tracking-wide text-[#1E1B18]">
           Cezar &amp; Isadora
         </h1>
-        <p className="text-xs sm:text-sm font-sans uppercase tracking-[0.2em] text-[#78716C] mt-1.5 sm:mt-2">
+        <p className="text-xs sm:text-sm font-sans uppercase tracking-[0.2em] text-[#78716C] mt-1 sm:mt-2">
           17 de Outubro de 2026
         </p>
         <Countdown />
-        <div className="w-12 h-px bg-[#D6CEBC] mx-auto mt-3.5 sm:mt-5" />
+        <div className="w-12 h-px bg-[#D6CEBC] mx-auto mt-3 sm:mt-5" />
       </header>
 
-      <section className="w-full max-w-md my-auto py-2 sm:py-4 z-10">
+      <section className="w-full max-w-md my-auto py-1 sm:py-3 z-10">
         {lastConfirmed ? (
           <SuccessState
             confirmedName={lastConfirmed.name}
@@ -135,14 +140,17 @@ export function App() {
           />
         ) : (
           <div className="text-center">
-            <h2 className="font-serif text-2xl sm:text-3xl font-light text-stone-800 mb-1.5 sm:mb-2">
+            <h2 className="font-serif text-2xl sm:text-3xl font-light text-stone-800 mb-1 sm:mb-2">
               Confirmação de Presença
             </h2>
-            <p className="text-xs text-stone-500 tracking-wider uppercase mb-4 sm:mb-6">
+            <p className="text-xs text-stone-500 tracking-wider uppercase mb-3 sm:mb-5">
               Por favor, informe seu nome completo para confirmar
             </p>
 
-            <RsvpForm onSuccess={handleRsvpSuccess} />
+            <RsvpForm
+              onSuccess={handleRsvpSuccess}
+              confirmedNames={deviceConfirmedNames}
+            />
           </div>
         )}
       </section>
