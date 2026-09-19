@@ -67,17 +67,21 @@ export async function submitRsvp(rawName: string): Promise<Rsvp> {
     }
   }
 
-  const localId = 'local_' + Math.random().toString(36).substring(2, 9)
-  const newRsvp: Rsvp = {
-    id: localId,
-    name: formatted,
-    normalizedName: normalized,
-    createdAt: timestamp,
+  if (import.meta.env.DEV) {
+    const localId = 'local_' + Math.random().toString(36).substring(2, 9)
+    const newRsvp: Rsvp = {
+      id: localId,
+      name: formatted,
+      normalizedName: normalized,
+      createdAt: timestamp,
+    }
+
+    const existing = getLocalRsvps()
+    saveLocalRsvps([newRsvp, ...existing])
+    return newRsvp
   }
 
-  const existing = getLocalRsvps()
-  saveLocalRsvps([newRsvp, ...existing])
-  return newRsvp
+  throw new Error('O sistema de confirmação está temporariamente indisponível. Por favor, tente novamente em instantes.')
 }
 
 export async function fetchRsvps(): Promise<Rsvp[]> {
@@ -98,7 +102,11 @@ export async function fetchRsvps(): Promise<Rsvp[]> {
     })
   }
 
-  return getLocalRsvps()
+  if (import.meta.env.DEV) {
+    return getLocalRsvps()
+  }
+
+  throw new Error('Banco de dados indisponível.')
 }
 
 export async function loginAdmin(email: string, password: string): Promise<User> {

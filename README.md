@@ -52,16 +52,17 @@ src/
 
 ### 2. Zero-Trust Firestore Security Rules (`firestore.rules`)
 - **Web Mutability Lockdown:** `update` and `delete` operations are permanently disabled for all web clients (`allow update, delete: if false;`), reserving record purges strictly to the Firebase Console.
-- **Role-Based Read Restriction:** Collection reads are restricted exclusively to authenticated administrative email addresses (`request.auth.token.email in ['admin@example.com']`).
-- **Strict Schema & Clock-Skew Validation:** Document creation is subjected to strict type and size constraints, rejecting undeclared fields:
+- **Role-Based Read Restriction:** Collection reads are restricted exclusively to authenticated administrative UIDs (`request.auth.uid in ['ADMIN_UID']`) or verified administrator emails (`request.auth.token.email_verified == true`).
+- **Strict Schema, Name Regex & Clock-Skew Validation:** Document creation is subjected to strict type, regex and size constraints, rejecting undeclared fields or non-name strings:
   ```javascript
   allow create: if request.resource.data.keys().hasOnly(['name', 'normalizedName', 'createdAt'])
                 && request.resource.data.name is string
                 && request.resource.data.name.size() >= 3
-                && request.resource.data.name.size() <= 100
+                && request.resource.data.name.size() <= 80
+                && request.resource.data.name.matches('^[a-zA-ZÀ-ÿ\\s\'.-]+$')
                 && request.resource.data.normalizedName is string
                 && request.resource.data.normalizedName.size() >= 3
-                && request.resource.data.normalizedName.size() <= 100
+                && request.resource.data.normalizedName.size() <= 80
                 && request.resource.data.createdAt is number
                 && request.resource.data.createdAt >= (request.time.toMillis() - 300000)
                 && request.resource.data.createdAt <= (request.time.toMillis() + 300000);
