@@ -107,7 +107,7 @@ export function AdminDashboard({ onLogout }: AdminDashboardProps) {
   }, [rsvps])
 
   return (
-    <div className="w-full max-w-3xl mx-auto px-3 py-4 sm:px-6 sm:py-6 animate-in fade-in duration-300">
+    <div className="w-full max-w-3xl mx-auto px-3 py-4 sm:px-6 sm:py-6">
       <header className="flex items-center justify-between gap-2 pb-4 border-b border-stone-200">
         <div>
           <h1 className="font-serif text-xl sm:text-2xl text-stone-900 font-normal">

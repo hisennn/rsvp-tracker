@@ -32,7 +32,7 @@ export function exportRsvpsToCsv(rsvps: Rsvp[]): void {
   link.setAttribute('href', url)
   link.setAttribute(
     'download',
-    `confirmacoes-casamento-cesar-isadora-${new Date().toISOString().slice(0, 10)}.csv`
+    `confirmacoes-casamento-cezar-isadora-${new Date().toISOString().slice(0, 10)}.csv`
   )
   document.body.appendChild(link)
   link.click()

@@ -49,7 +49,7 @@ export function AdminLogin({ onSuccess, onBack }: AdminLoginProps) {
   }
 
   return (
-    <div className="w-full max-w-sm mx-auto p-6 md:p-8 rounded-2xl bg-white border border-stone-200/80 shadow-xl text-center animate-in fade-in duration-300">
+    <div className="w-full max-w-sm mx-auto p-6 md:p-8 rounded-2xl bg-white border border-stone-200/80 shadow-xl text-center">
       <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-stone-100 text-stone-800 mb-4">
         <Lock className="w-5 h-5" />
       </div>
@@ -75,7 +75,7 @@ export function AdminLogin({ onSuccess, onBack }: AdminLoginProps) {
               type="email"
               required
               autoComplete="email"
-              placeholder="admin@example.com"
+              placeholder="admin@cesarisadora.com"
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value)
@@ -114,7 +114,7 @@ export function AdminLogin({ onSuccess, onBack }: AdminLoginProps) {
         </div>
 
         {error && (
-          <p className="text-xs text-rose-600 font-medium text-center animate-in fade-in">
+          <p className="text-xs text-rose-600 font-medium text-center">
             {error}
           </p>
         )}

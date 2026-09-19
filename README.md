@@ -27,6 +27,7 @@ src/
 │   ├── AdminLogin.tsx       # Secure credentials-based authentication
 │   ├── AlphabetFilter.tsx   # Dynamic A-Z categorical index
 │   ├── ConfirmationModal.tsx# Confirmation dialog
+│   ├── Countdown.tsx        # High-elegance real-time wedding countdown
 │   ├── DuplicateBadge.tsx   # Visual indicator for duplicated records
 │   ├── RsvpForm.tsx         # Guest submission with throttling & validation
 │   └── SuccessState.tsx     # Post-confirmation state

@@ -25,3 +25,12 @@ body {
   color: var(--color-charcoal);
   min-height: 100dvh;
 }
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+

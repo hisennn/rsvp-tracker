@@ -19,8 +19,8 @@ export function validateGuestName(sanitized: string): string | null {
   if (sanitized.length < 3) {
     return 'O nome deve conter pelo menos 3 letras.'
   }
-  if (sanitized.length > 100) {
-    return 'O nome não pode exceder 100 caracteres.'
+  if (sanitized.length > 80) {
+    return 'O nome não pode exceder 80 caracteres.'
   }
   const nameRegex = /^[\p{L}\s'.-]+$/u
   if (!nameRegex.test(sanitized)) {

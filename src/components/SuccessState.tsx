@@ -7,16 +7,16 @@ interface SuccessStateProps {
 
 export function SuccessState({ confirmedName, onReset }: SuccessStateProps) {
   return (
-    <div className="w-full max-w-md mx-auto text-center animate-in fade-in zoom-in-95 duration-300">
-      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-stone-900 text-stone-100 mb-6 shadow-md">
-        <Check className="w-8 h-8 stroke-[2.5]" />
+    <div className="w-full max-w-md mx-auto text-center">
+      <div className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-stone-900 text-stone-100 mb-4 sm:mb-6 shadow-xs">
+        <Check className="w-7 h-7 sm:w-8 sm:h-8 stroke-[2.5]" />
       </div>
 
-      <h2 className="font-serif text-3xl sm:text-4xl text-stone-900 font-normal tracking-wide mb-3">
+      <h2 className="font-serif text-2xl sm:text-4xl text-stone-900 font-normal tracking-wide mb-2 sm:mb-3">
         Presença Confirmada!
       </h2>
 
-      <p className="font-sans text-stone-600 text-base leading-relaxed mb-6">
+      <p className="font-sans text-stone-600 text-sm sm:text-base leading-relaxed mb-4 sm:mb-6">
         Ficamos muito felizes em celebrar este momento com você,{' '}
         <span className="font-semibold text-stone-900 uppercase">
           {confirmedName}
@@ -24,7 +24,7 @@ export function SuccessState({ confirmedName, onReset }: SuccessStateProps) {
         .
       </p>
 
-      <div className="pt-2">
+      <div className="pt-1 sm:pt-2">
         <button
           type="button"
           onClick={onReset}

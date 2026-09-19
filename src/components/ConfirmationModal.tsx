@@ -36,7 +36,7 @@ export function ConfirmationModal({
       aria-labelledby="modal-title"
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm transition-opacity"
     >
-      <div className="w-full max-w-sm rounded-2xl bg-white p-6 md:p-8 shadow-2xl border border-stone-200/80 text-center animate-in fade-in zoom-in-95 duration-200">
+      <div className="w-full max-w-sm rounded-2xl bg-white p-6 md:p-8 shadow-xl border border-stone-200/80 text-center">
         <h3
           id="modal-title"
           className="font-serif text-2xl text-stone-900 font-normal tracking-wide mb-2"

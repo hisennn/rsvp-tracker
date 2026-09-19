@@ -36,9 +36,7 @@ function getLocalRsvps(): Rsvp[] {
 function saveLocalRsvps(list: Rsvp[]): void {
   try {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(list))
-  } catch {
-    //
-  }
+  } catch {}
 }
 
 export async function submitRsvp(rawName: string): Promise<Rsvp> {

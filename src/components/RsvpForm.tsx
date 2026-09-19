@@ -82,9 +82,7 @@ export function RsvpForm({ onSuccess }: RsvpFormProps) {
       try {
         localStorage.setItem(COOLDOWN_KEY, String(Date.now()))
         setCooldownRemaining(COOLDOWN_SECONDS)
-      } catch {
-        //
-      }
+      } catch {}
       setIsModalOpen(false)
       onSuccess(result)
     } catch (err: unknown) {
@@ -102,9 +100,9 @@ export function RsvpForm({ onSuccess }: RsvpFormProps) {
     <>
       <form
         onSubmit={handleOpenModal}
-        className="w-full max-w-md mx-auto space-y-5 animate-in fade-in duration-300"
+        className="w-full max-w-md mx-auto space-y-4 sm:space-y-5"
       >
-        <div className="space-y-2 text-left">
+        <div className="space-y-1.5 sm:space-y-2 text-left">
           <label
             htmlFor="guest-name"
             className="block text-xs uppercase tracking-widest font-medium text-stone-600"
@@ -123,12 +121,12 @@ export function RsvpForm({ onSuccess }: RsvpFormProps) {
               setName(e.target.value)
               if (error) setError(null)
             }}
-            className="w-full px-4 py-3.5 rounded-xl bg-white border border-stone-300/80 text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-stone-900/20 focus:border-stone-900 transition-all font-sans text-base shadow-xs disabled:opacity-60 disabled:bg-stone-50"
+            className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-white border border-stone-300/80 text-stone-900 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-stone-900/20 focus:border-stone-900 transition-all font-sans text-base shadow-xs disabled:opacity-60 disabled:bg-stone-50"
           />
         </div>
 
         {error && (
-          <p className="text-xs text-rose-600 font-medium tracking-wide text-left animate-in fade-in">
+          <p className="text-xs text-rose-600 font-medium tracking-wide text-left">
             {error}
           </p>
         )}
@@ -136,7 +134,7 @@ export function RsvpForm({ onSuccess }: RsvpFormProps) {
         <button
           type="submit"
           disabled={isSubmitting || cooldownRemaining > 0}
-          className="w-full py-4 px-6 rounded-xl bg-stone-900 text-stone-50 font-medium text-sm uppercase tracking-widest transition-all hover:bg-stone-800 active:scale-[0.99] shadow-sm cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+          className="w-full py-3.5 sm:py-4 px-6 rounded-xl bg-stone-900 text-stone-50 font-medium text-sm uppercase tracking-widest transition-all hover:bg-stone-800 active:scale-[0.99] shadow-xs cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {isSubmitting
             ? 'Confirmando...'
